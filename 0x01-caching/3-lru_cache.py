@@ -1,25 +1,35 @@
 #!/usr/bin/env python3
-""" 3-main """
+"""
+LRUCache module
+"""
 
 from base_caching import BaseCaching
 
 
 class LRUCache(BaseCaching):
     """
-    Defines a LRU caching system that inherits from BaseCaching.
+    A class that implements an LRU (Least Recently Used) caching system.
+
+    Inherits from BaseCaching and provides functionality to add items to
+    the cache with an eviction strategy that removes the least recently
+    used item when the cache exceeds its size limit.
     """
 
     def __init__(self):
         """
-        Initialize the cache and LRU order tracking.
+        Initialize the LRUCache instance.
         """
         super().__init__()
         self.lru_order = []
 
     def put(self, key, item):
         """
-        Assign the item to the cache under the key.
-        Implements LRU eviction if cache exceeds the max limit.
+        Add an item to the cache. If the cache exceeds the maximum limit,
+        evict the least recently used item.
+
+        Args:
+            key (str): The key under which the item is stored.
+            item (any): The item to be stored in the cache.
         """
         if key is None or item is None:
             return
@@ -37,8 +47,14 @@ class LRUCache(BaseCaching):
 
     def get(self, key):
         """
-        Return the item stored in the cache for the key.
-        Move the key to the end to mark it as recently used.
+        Retrieve an item from the cache.
+
+        Args:
+            key (str): The key associated with the item to retrieve.
+
+        Returns:
+            any: The item associated with the key, or None if the key
+            does not exist in the cache.
         """
         if key is None or key not in self.cache_data:
             return None
