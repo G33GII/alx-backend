@@ -15,7 +15,8 @@ class LIFOCache(BaseCaching):
     def put(self, key, item):
         """
         Assign to the dictionary the item value for the given key.
-        If the number of items in the cache is higher than BaseCaching.MAX_ITEMS,
+        If the number of items in
+        the cache is higher than BaseCaching.MAX_ITEMS,
         the last item put in the cache is discarded and added to the cache.
         """
         if key is None or item is None:
