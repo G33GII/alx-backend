@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""_summary_
+"""
+LIFOCache module
 """
 
 from base_caching import BaseCaching
@@ -7,27 +8,23 @@ from base_caching import BaseCaching
 
 class LIFOCache(BaseCaching):
     """
-    LIFO (Last In First Out) cache implementation.
-
-    Inherits from the BaseCaching class and uses
-    the self.cache_data dictionary
-    from the parent class to store the cached items.
+    LIFO (Last-In-First-Out) caching system.
+    Inherits from BaseCaching and implements a put and get method.
     """
 
     def __init__(self):
         """
-        Initializes the LIFOCache object.
-        Calls the parent class __init__ method.
+        Initialize the class with the parent's initialization.
         """
         super().__init__()
 
     def put(self, key, item):
         """
-        Add an item in the cache.
-        If the number of items in the cache
-        is higher that BaseCaching.MAX_ITEMS
-        then the last item put in cache is removed
-        from the cache and discarded.
+        Add an item in the cache using LIFO policy.
+
+        Args:
+            key (str): The key for the item.
+            item (any): The item to be cached.
         """
         if key is None or item is None:
             return
@@ -35,14 +32,18 @@ class LIFOCache(BaseCaching):
         self.cache_data[key] = item
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            lru_key = next(reversed(self.cache_data))
-            del self.cache_data[lru_key]
-            print("DISCARD:", lru_key)
+            last_key = next(reversed(self.cache_data))
+            del self.cache_data[last_key]
+            print("DISCARD:", last_key)
 
     def get(self, key):
         """
-        Get an item by key.
+        Retrieve an item by key from the cache.
+
+        Args:
+            key (str): The key of the item to retrieve.
+
+        Returns:
+            any: The cached item, or None if the key does not exist.
         """
-        if key is None or key not in self.cache_data:
-            return None
-        return self.cache_data[key]
+        return self.cache_data.get(key, None)
