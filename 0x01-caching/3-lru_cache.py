@@ -11,17 +11,15 @@ class LRUCache(BaseCaching):
 
     def __init__(self):
         """
-        Initialize the cache.
+        Initialize the cache and LRU order tracking.
         """
         super().__init__()
         self.lru_order = []
 
     def put(self, key, item):
         """
-        Assign to the dictionary the item value for the given key.
-        If the number of items in the cache
-        is higher than BaseCaching.MAX_ITEMS,
-        the least recently used item is discarded from the cache.
+        Assign the item to the cache under the key.
+        Implements LRU eviction if cache exceeds the max limit.
         """
         if key is None or item is None:
             return
@@ -34,13 +32,13 @@ class LRUCache(BaseCaching):
 
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             least_recent_key = self.lru_order.pop(0)
-            print(f"DISCARD: {least_recent_key}")
             del self.cache_data[least_recent_key]
+            print(f"DISCARD: {least_recent_key}")
 
     def get(self, key):
         """
-        Return the value linked to the given key in the cache.
-        If the key doesn't exist or is None, return None.
+        Return the item stored in the cache for the key.
+        Move the key to the end to mark it as recently used.
         """
         if key is None or key not in self.cache_data:
             return None
