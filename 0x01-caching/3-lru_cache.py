@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+""" 3-main """
+
 from base_caching import BaseCaching
 
 
