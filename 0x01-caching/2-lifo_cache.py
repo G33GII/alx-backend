@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+""" LIFO Caching Algorithm """
+
 from base_caching import BaseCaching
 
 
