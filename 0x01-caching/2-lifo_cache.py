@@ -2,6 +2,9 @@
 """_summary_
 """
 
+from base_caching import BaseCaching
+
+
 class LIFOCache(BaseCaching):
     """
     LIFO (Last In First Out) cache implementation.
