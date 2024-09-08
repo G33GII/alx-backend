@@ -10,7 +10,7 @@ from flask_babel import Babel
 class Config:
     """
     Configuration class for Flask-Babel.
-    
+
     Attributes:
         LANGUAGES (list): Supported languages.
         BABEL_DEFAULT_LOCALE (str): Default language for the app.
